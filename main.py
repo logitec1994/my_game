@@ -1,5 +1,6 @@
 from art import tprint
 from game import Game
+from character import Character
 
 logo = "Main menu"
 
@@ -10,9 +11,17 @@ print("2: Quit")
 
 ans = input("Coise: ")
 
-while Game.is_game:
-    match ans:
-        case "1":
-            print("Game is ON! Enjoy")
-        case _:
-            is_game = False
+game = Game()
+char = Character()
+char.create()
+
+match ans:
+    case "1":
+        game.is_game = True
+        print("Game is ON! Enjoy")
+        while game.is_game:
+            if char.get_health() < 0:
+                game.is_game = False
+    case _:
+        Game.is_game = False
+
